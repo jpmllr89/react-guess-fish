@@ -1,7 +1,5 @@
 import { Component } from "react";
-
-const totalCount = 0;
-const correctCount = 0;
+import "./styles/final-score.css";
 
 export class ClassFinalScore extends Component {
   render() {
@@ -9,9 +7,9 @@ export class ClassFinalScore extends Component {
       <div id="final-score">
         <h1>Your Final Score Was</h1>
         <div id="score">
-          <p>{correctCount}</p>
+          <p>{this.props.score}</p>
           <hr />
-          <p>{totalCount}</p>
+          <p>{4}</p>
         </div>
       </div>
     );

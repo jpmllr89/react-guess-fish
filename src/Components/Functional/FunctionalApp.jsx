@@ -14,29 +14,35 @@ export function FunctionalApp() {
 
   return (
     <>
-      <FunctionalScoreBoard 
+    {gameOver ? 
+      <FunctionalFinalScore 
         score = {score}
         wrongGuesses={wrongGuesses}
-        answersLeft={answersLeft}
-      />
-      <FunctionalGameBoard 
-        setScore={setScore} 
-        setWrongGuesses={setWrongGuesses} 
-        setInput={setInput}
-        input = {input}
-        answer = {answer}
-        setAnswer = {setAnswer}
-        score = {score}
-        wrongGuesses = {wrongGuesses}
-        setAnswersLeft = {setAnswersLeft}
-        answersLeft = {answersLeft}
-        gameOver = {gameOver}
-        setGameOver = {setGameOver}
+      />:
+      <>
+        <FunctionalScoreBoard 
+          score = {score}
+          wrongGuesses={wrongGuesses}
+          answersLeft={answersLeft}
         />
-      {gameOver && <FunctionalFinalScore 
-        score = {score}
-        wrongGuesses={wrongGuesses}
-      />}
+        <FunctionalGameBoard 
+          setScore={setScore} 
+          setWrongGuesses={setWrongGuesses} 
+          setInput={setInput}
+          input = {input}
+          answer = {answer}
+          setAnswer = {setAnswer}
+          score = {score}
+          wrongGuesses = {wrongGuesses}
+          setAnswersLeft = {setAnswersLeft}
+          answersLeft = {answersLeft}
+          gameOver = {gameOver}
+          setGameOver = {setGameOver}
+        />
+      </>
+      }
+     
+      
     </>
   );
 }

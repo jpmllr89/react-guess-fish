@@ -34,9 +34,9 @@ export function FunctionalGameBoard({setScore, setWrongGuesses, input, wrongGues
   function handleSubmit(e){
     e.preventDefault();
     determineScore(input);
-    gameState();
     if (nextFishToName){
       setFishes(fishes + 1);
+      gameState();
     };
   }
 

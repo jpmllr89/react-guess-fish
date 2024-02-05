@@ -7,6 +7,7 @@ export class ClassGameBoard extends Component {
     super(props);
 
     this.state = {
+      inputValue: "",
       initialFishes: [
         {
           name: "trout",
@@ -33,6 +34,7 @@ export class ClassGameBoard extends Component {
   }
 
   handleTextInput = (e) => {
+    this.setState({ inputValue: e.target.value });
     this.props.updateInput(e.target.value);
   };
 
@@ -43,14 +45,12 @@ export class ClassGameBoard extends Component {
    if(!gameOver){
     if (input === nextFishToName.name) {
       updateScore(score + 1);
-      console.log("correct!", score + 1);
-      updateAnswersLeft(answersLeft.filter((answer) => answer !== input));
-      console.log("answers left", answersLeft);
+
     } else {
       this.props.updateWrongGuesses(wrongGuesses + 1);
-      console.log("incorrect", wrongGuesses + 1);
 
     }
+    updateAnswersLeft(answersLeft.slice(1));
    }
     
     
@@ -61,7 +61,6 @@ export class ClassGameBoard extends Component {
 
     if (wrongGuesses === 3 || answersLeft.length === 1) {
       updateGameOver(true);
-      console.log("game over", gameOver);
     }
   };
 
@@ -77,10 +76,8 @@ export class ClassGameBoard extends Component {
       const nextFishToName = this.state.initialFishes[fishes + 1];
       this.setState({ fishes: fishes + 1, nextFishToName });
       this.gameState();
-    } else {
-      // Handle the case when there are no more fishes left
-      console.log("No more fishes left");
     }
+    this.setState({ inputValue: "" });
   };
   
 
@@ -94,7 +91,7 @@ export class ClassGameBoard extends Component {
         </div>
         <form id="fish-guess-form">
           <label htmlFor="fish-guess">What kind of fish is this?</label>
-          <input type="text" name="fish-guess" onChange={this.handleTextInput} />
+          <input type="text" name="fish-guess" onChange={this.handleTextInput} value={this.state.inputValue} />
           <input type="submit" onClick={this.handleSubmit} />
         </form>
       </div>

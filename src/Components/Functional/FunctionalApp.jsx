@@ -12,6 +12,8 @@ export function FunctionalApp() {
   const [input, setInput] = useState("");
   const [answer, setAnswer] = useState("");
 
+  
+
   return (
     <>
     {gameOver ? 

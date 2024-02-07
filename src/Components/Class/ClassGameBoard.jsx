@@ -1,31 +1,16 @@
 import React, { Component } from "react";
 import "./styles/game-board.css";
 import { Images } from "../../assets/Images";
+import { initialFishes } from "../../data/fishes";
 
 export class ClassGameBoard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      input: "",
       inputValue: "",
-      initialFishes: [
-        {
-          name: "trout",
-          url: Images.trout,
-        },
-        {
-          name: "salmon",
-          url: Images.salmon,
-        },
-        {
-          name: "tuna",
-          url: Images.tuna,
-        },
-        {
-          name: "shark",
-          url: Images.shark,
-        },
-      ],
+      initialFishes: initialFishes,
       fishes: 0,
       nextFishToName: null, // Change 1 to null
     };
@@ -33,14 +18,18 @@ export class ClassGameBoard extends Component {
     this.state.nextFishToName = this.state.initialFishes[0];
   }
 
+  updateInput = (input) => {
+    this.setState({ input: input });
+  };
+
   handleTextInput = (e) => {
     this.setState({ inputValue: e.target.value });
-    this.props.updateInput(e.target.value);
+    this.updateInput(e.target.value);
+    console.log(this.state.nextFishToName.name);
   };
 
   determineScore = () => {
     const {
-      input,
       updateScore,
       updateAnswersLeft,
       wrongGuesses,
@@ -48,7 +37,7 @@ export class ClassGameBoard extends Component {
       score,
       gameOver,
     } = this.props;
-    const { nextFishToName } = this.state;
+    const { input, nextFishToName } = this.state;
 
     if (!gameOver) {
       if (input === nextFishToName.name) {
@@ -56,36 +45,27 @@ export class ClassGameBoard extends Component {
       } else {
         this.props.updateWrongGuesses(wrongGuesses + 1);
       }
-      updateAnswersLeft(answersLeft.slice(1));
     }
-  };
-
-  gameState = () => {
-    const { wrongGuesses, answersLeft, updateGameOver, gameOver } = this.props;
-
-    if (wrongGuesses === 3 || answersLeft.length === 1) {
-      updateGameOver(true);
-    }
+    updateAnswersLeft(answersLeft.slice(1));
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.determineScore();
-    this.gameState();
 
     const { fishes } = this.state;
+    this.setState({ inputValue: "" });
 
     // Check if there are more fishes left
     if (fishes < this.state.initialFishes.length - 1) {
       const nextFishToName = this.state.initialFishes[fishes + 1];
       this.setState({ fishes: fishes + 1, nextFishToName });
-      this.gameState();
     }
-    this.setState({ inputValue: "" });
   };
 
   render() {
-    const { nextFishToName } = this.state;
+    const { nextFishToName } =
+      this.state.fishes < this.state.initialFishes.length ? this.state : null;
 
     return (
       <div id="game-board">

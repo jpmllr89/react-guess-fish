@@ -5,9 +5,7 @@ import { initialFishes } from "../../data/fishes";
 export function FunctionalGameBoard({
   setScore,
   setWrongGuesses,
-  input,
   wrongGuesses,
-  setInput,
   score,
   setAnswersLeft,
   answersLeft,
@@ -16,8 +14,12 @@ export function FunctionalGameBoard({
 }) {
   const [fishes, setFishes] = useState(0);
 
+  const [input, setInput] = useState("");
+  const [answer, setAnswer] = useState("");
+
   const nextFishToName =
     fishes < initialFishes.length ? initialFishes[fishes] : null;
+
   function handleTextInput(e) {
     setInput(e.target.value);
   }
@@ -28,7 +30,6 @@ export function FunctionalGameBoard({
     setInput("");
     if (nextFishToName) {
       setFishes(fishes + 1);
-      gameState();
     }
   }
 
@@ -39,12 +40,6 @@ export function FunctionalGameBoard({
       setWrongGuesses(wrongGuesses + 1);
     }
     setAnswersLeft(answersLeft.slice(1));
-  }
-
-  function gameState() {
-    if (wrongGuesses === 3 || answersLeft.length === 1) {
-      setGameOver(true);
-    }
   }
 
   return (

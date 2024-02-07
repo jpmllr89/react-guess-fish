@@ -2,6 +2,7 @@ import { Component } from "react";
 import { ClassScoreBoard } from "./ClassScoreBoard";
 import { ClassGameBoard } from "./ClassGameBoard";
 import { ClassFinalScore } from "./ClassFinalScore";
+import { initialFishes } from "../../data/fishes";
 
 export class ClassApp extends Component {
   constructor(props) {
@@ -10,10 +11,7 @@ export class ClassApp extends Component {
     this.state = {
       score: 0,
       wrongGuesses: 0,
-      answersLeft: ["trout", "salmon", "tuna", "shark"],
-      gameOver: false,
-      input: "",
-      answer: "",
+      answersLeft: initialFishes.map((fish) => fish.name),
     };
   }
 
@@ -27,30 +25,20 @@ export class ClassApp extends Component {
     }));
   };
 
-  updateAnswersLeft = (answersLeft) => {
-    this.setState({
-      answersLeft: this.state.answersLeft.filter(
-        (answer) => answer !== this.state.input
-      ),
-    });
-  };
-
-  updateGameOver = (gameOver) => {
-    this.setState({ gameOver: !this.state.gameOver });
-  };
-
-  updateInput = (input) => {
-    this.setState({ input: input });
-  };
-
-  updateAnswer = (answer) => {
-    this.setState({ answer: answer });
+  updateAnswersLeft = (answer) => {
+    this.setState((prevState) => ({
+      answersLeft: prevState.answersLeft.slice(1),
+    }));
   };
 
   render() {
+    const { score, wrongGuesses, answersLeft } = this.state;
+    const guesses = score + wrongGuesses;
+    const gameOver = guesses === initialFishes.length;
+    console.log(answersLeft);
     return (
       <>
-        {this.state.gameOver ? (
+        {gameOver ? (
           <ClassFinalScore
             score={this.state.score}
             wrongGuesses={this.state.wrongGuesses}
@@ -65,16 +53,10 @@ export class ClassApp extends Component {
             <ClassGameBoard
               updateScore={this.updateScore}
               updateWrongGuesses={this.updateWrongGuesses}
-              updateInput={this.updateInput}
-              input={this.state.input}
-              answer={this.state.answer}
-              updateAnswer={this.updateAnswer}
               score={this.state.score}
               wrongGuesses={this.state.wrongGuesses}
               updateAnswersLeft={this.updateAnswersLeft}
               answersLeft={this.state.answersLeft}
-              gameOver={this.state.gameOver}
-              updateGameOver={this.updateGameOver}
             />
           </>
         )}

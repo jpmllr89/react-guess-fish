@@ -39,21 +39,25 @@ export class ClassGameBoard extends Component {
   };
 
   determineScore = () => {
-    const { input, updateScore, updateAnswersLeft, wrongGuesses, answersLeft, score, gameOver } = this.props;
+    const {
+      input,
+      updateScore,
+      updateAnswersLeft,
+      wrongGuesses,
+      answersLeft,
+      score,
+      gameOver,
+    } = this.props;
     const { nextFishToName } = this.state;
 
-   if(!gameOver){
-    if (input === nextFishToName.name) {
-      updateScore(score + 1);
-
-    } else {
-      this.props.updateWrongGuesses(wrongGuesses + 1);
-
+    if (!gameOver) {
+      if (input === nextFishToName.name) {
+        updateScore(score + 1);
+      } else {
+        this.props.updateWrongGuesses(wrongGuesses + 1);
+      }
+      updateAnswersLeft(answersLeft.slice(1));
     }
-    updateAnswersLeft(answersLeft.slice(1));
-   }
-    
-    
   };
 
   gameState = () => {
@@ -68,9 +72,9 @@ export class ClassGameBoard extends Component {
     e.preventDefault();
     this.determineScore();
     this.gameState();
-  
+
     const { fishes } = this.state;
-  
+
     // Check if there are more fishes left
     if (fishes < this.state.initialFishes.length - 1) {
       const nextFishToName = this.state.initialFishes[fishes + 1];
@@ -79,7 +83,6 @@ export class ClassGameBoard extends Component {
     }
     this.setState({ inputValue: "" });
   };
-  
 
   render() {
     const { nextFishToName } = this.state;
@@ -87,11 +90,19 @@ export class ClassGameBoard extends Component {
     return (
       <div id="game-board">
         <div id="fish-container">
-          <img src={nextFishToName ? nextFishToName.url : null} alt={nextFishToName ? nextFishToName.name : null} />
+          <img
+            src={nextFishToName ? nextFishToName.url : null}
+            alt={nextFishToName ? nextFishToName.name : null}
+          />
         </div>
         <form id="fish-guess-form">
           <label htmlFor="fish-guess">What kind of fish is this?</label>
-          <input type="text" name="fish-guess" onChange={this.handleTextInput} value={this.state.inputValue} />
+          <input
+            type="text"
+            name="fish-guess"
+            onChange={this.handleTextInput}
+            value={this.state.inputValue}
+          />
           <input type="submit" onClick={this.handleSubmit} />
         </form>
       </div>

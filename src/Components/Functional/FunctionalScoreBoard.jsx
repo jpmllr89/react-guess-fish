@@ -1,9 +1,7 @@
 import "./styles/score-board.css";
 //  Where the score is presented
 
-
-
-export function FunctionalScoreBoard({score, wrongGuesses, answersLeft}) {
+export function FunctionalScoreBoard({ score, wrongGuesses, answersLeft }) {
   return (
     <div id="score-board">
       <div>Incorrect 🔻: {wrongGuesses}</div>

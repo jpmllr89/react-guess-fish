@@ -1,4 +1,5 @@
 import { Images } from "../assets/Images";
+
 export const initialFishes = [
   {
     name: "trout",

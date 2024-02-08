@@ -1,4 +1,5 @@
 import "./styles/score-board.css";
+import { React } from "react";
 //  Where the score is presented
 
 export function FunctionalScoreBoard({ score, wrongGuesses, answersLeft }) {

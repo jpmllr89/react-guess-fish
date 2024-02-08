@@ -1,4 +1,5 @@
 import "./styles/final-score.css";
+import { React } from "react";
 
 export function FunctionalFinalScore({ wrongGuesses, score }) {
   return (

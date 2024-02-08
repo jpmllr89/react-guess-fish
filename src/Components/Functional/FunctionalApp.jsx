@@ -1,7 +1,7 @@
 import { FunctionalGameBoard } from "./FunctionalGameBoard";
 import { FunctionalScoreBoard } from "./FunctionalScoreBoard";
 import { FunctionalFinalScore } from "./FunctionalFinalScore";
-import { useState } from "react";
+import { React, useState } from "react";
 import { initialFishes } from "../../data/fishes";
 
 export function FunctionalApp() {

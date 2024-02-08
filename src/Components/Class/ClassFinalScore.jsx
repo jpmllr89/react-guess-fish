@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { React, Component } from "react";
 import "./styles/final-score.css";
 
 export class ClassFinalScore extends Component {
@@ -9,7 +9,7 @@ export class ClassFinalScore extends Component {
         <div id="score">
           <p>{this.props.score}</p>
           <hr />
-          <p>{4}</p>
+          <p>{this.props.score + this.props.wrongGuesses}</p>
         </div>
       </div>
     );

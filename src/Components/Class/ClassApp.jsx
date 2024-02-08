@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { React, Component } from "react";
 import { ClassScoreBoard } from "./ClassScoreBoard";
 import { ClassGameBoard } from "./ClassGameBoard";
 import { ClassFinalScore } from "./ClassFinalScore";
@@ -15,17 +15,17 @@ export class ClassApp extends Component {
     };
   }
 
-  updateScore = (score) => {
+  updateScore = () => {
     this.setState((prevState) => ({ score: prevState.score + 1 }));
   };
 
-  updateWrongGuesses = (wrongGuesses) => {
+  updateWrongGuesses = () => {
     this.setState((prevState) => ({
       wrongGuesses: prevState.wrongGuesses + 1,
     }));
   };
 
-  updateAnswersLeft = (answer) => {
+  updateAnswersLeft = () => {
     this.setState((prevState) => ({
       answersLeft: prevState.answersLeft.slice(1),
     }));

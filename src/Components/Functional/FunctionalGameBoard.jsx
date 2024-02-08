@@ -1,5 +1,5 @@
 import "./styles/game-board.css";
-import { useState } from "react";
+import { React, useState } from "react";
 import { initialFishes } from "../../data/fishes";
 
 export function FunctionalGameBoard({
@@ -9,13 +9,10 @@ export function FunctionalGameBoard({
   score,
   setAnswersLeft,
   answersLeft,
-  gameOver,
-  setGameOver,
 }) {
   const [fishes, setFishes] = useState(0);
 
   const [input, setInput] = useState("");
-  const [answer, setAnswer] = useState("");
 
   const nextFishToName =
     fishes < initialFishes.length ? initialFishes[fishes] : null;

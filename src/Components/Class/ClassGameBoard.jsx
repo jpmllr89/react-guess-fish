@@ -1,6 +1,5 @@
-import React, { Component } from "react";
 import "./styles/game-board.css";
-import { Images } from "../../assets/Images";
+import { React, Component } from "react";
 import { initialFishes } from "../../data/fishes";
 
 export class ClassGameBoard extends Component {
@@ -29,24 +28,16 @@ export class ClassGameBoard extends Component {
   };
 
   determineScore = () => {
-    const {
-      updateScore,
-      updateAnswersLeft,
-      wrongGuesses,
-      answersLeft,
-      score,
-      gameOver,
-    } = this.props;
+    const { updateScore, updateAnswersLeft, wrongGuesses, score } = this.props;
     const { input, nextFishToName } = this.state;
 
-    if (!gameOver) {
-      if (input === nextFishToName.name) {
-        updateScore(score + 1);
-      } else {
-        this.props.updateWrongGuesses(wrongGuesses + 1);
-      }
+    if (input === nextFishToName.name) {
+      updateScore(score + 1);
+    } else {
+      this.props.updateWrongGuesses(wrongGuesses + 1);
     }
-    updateAnswersLeft(answersLeft.slice(1));
+
+    updateAnswersLeft();
   };
 
   handleSubmit = (e) => {

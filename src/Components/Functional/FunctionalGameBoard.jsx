@@ -1,42 +1,29 @@
 import "./styles/game-board.css";
 import { React, useState } from "react";
-import { initialFishes } from "../../data/fishes";
 
 export function FunctionalGameBoard({
   setScore,
   setWrongGuesses,
-  wrongGuesses,
-  score,
-  setAnswersLeft,
-  answersLeft,
+  nextFishToName,
 }) {
-  const [fishes, setFishes] = useState(0);
-
   const [input, setInput] = useState("");
-
-  const nextFishToName =
-    fishes < initialFishes.length ? initialFishes[fishes] : null;
 
   function handleTextInput(e) {
     setInput(e.target.value);
   }
 
-  function handleSubmit(e) {
+  function handleSubmit(e, fishes) {
     e.preventDefault();
     determineScore(input);
     setInput("");
-    if (nextFishToName) {
-      setFishes(fishes + 1);
-    }
   }
 
   function determineScore(input) {
     if (input === nextFishToName.name) {
-      setScore(score + 1);
+      setScore((prevScore) => prevScore + 1);
     } else {
-      setWrongGuesses(wrongGuesses + 1);
+      setWrongGuesses((prevWrongGuesses) => prevWrongGuesses + 1);
     }
-    setAnswersLeft(answersLeft.slice(1));
   }
 
   return (

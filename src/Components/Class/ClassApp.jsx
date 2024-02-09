@@ -35,7 +35,7 @@ export class ClassApp extends Component {
     const { score, wrongGuesses, answersLeft } = this.state;
     const guesses = score + wrongGuesses;
     const gameOver = guesses === initialFishes.length;
-    console.log(answersLeft);
+
     return (
       <>
         {gameOver ? (

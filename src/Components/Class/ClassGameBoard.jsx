@@ -1,6 +1,5 @@
 import "./styles/game-board.css";
 import { React, Component } from "react";
-import { initialFishes } from "../../data/fishes";
 
 export class ClassGameBoard extends Component {
   constructor(props) {
@@ -9,12 +8,7 @@ export class ClassGameBoard extends Component {
     this.state = {
       input: "",
       inputValue: "",
-      initialFishes: initialFishes,
-      fishes: 0,
-      nextFishToName: null, // Change 1 to null
     };
-
-    this.state.nextFishToName = this.state.initialFishes[0];
   }
 
   updateInput = (input) => {
@@ -24,12 +18,12 @@ export class ClassGameBoard extends Component {
   handleTextInput = (e) => {
     this.setState({ inputValue: e.target.value });
     this.updateInput(e.target.value);
-    console.log(this.state.nextFishToName.name);
+    // console.log(this.state.nextFishToName.name);
   };
 
   determineScore = () => {
-    const { updateScore, updateAnswersLeft, wrongGuesses, score } = this.props;
-    const { input, nextFishToName } = this.state;
+    const { updateScore, nextFishToName, wrongGuesses, score } = this.props;
+    const { input } = this.state;
 
     if (input === nextFishToName.name) {
       updateScore(score + 1);
@@ -37,34 +31,24 @@ export class ClassGameBoard extends Component {
       this.props.updateWrongGuesses(wrongGuesses + 1);
     }
 
-    updateAnswersLeft();
+    // updateAnswersLeft();
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.determineScore();
-
-    const { fishes } = this.state;
     this.setState({ inputValue: "" });
-
-    // Check if there are more fishes left
-    if (fishes < this.state.initialFishes.length - 1) {
-      const nextFishToName = this.state.initialFishes[fishes + 1];
-      this.setState({ fishes: fishes + 1, nextFishToName });
-    }
   };
 
   render() {
-    const { nextFishToName } =
-      this.state.fishes < this.state.initialFishes.length ? this.state : null;
-
+    const { nextFishToName } = this.props;
+    console.log(nextFishToName);
     return (
       <div id="game-board">
         <div id="fish-container">
-          <img
-            src={nextFishToName ? nextFishToName.url : null}
-            alt={nextFishToName ? nextFishToName.name : null}
-          />
+          {nextFishToName && (
+            <img src={nextFishToName.url} alt={nextFishToName.name} />
+          )}
         </div>
         <form id="fish-guess-form">
           <label htmlFor="fish-guess">What kind of fish is this?</label>

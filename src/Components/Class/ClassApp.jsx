@@ -11,7 +11,6 @@ export class ClassApp extends Component {
     this.state = {
       score: 0,
       wrongGuesses: 0,
-      answersLeft: initialFishes.map((fish) => fish.name),
     };
   }
 
@@ -32,9 +31,10 @@ export class ClassApp extends Component {
   };
 
   render() {
-    const { score, wrongGuesses, answersLeft } = this.state;
+    const { score, wrongGuesses } = this.state;
     const guesses = score + wrongGuesses;
     const gameOver = guesses === initialFishes.length;
+    const answersLeft = initialFishes.map((fish) => fish.name).slice(guesses);
 
     return (
       <>
@@ -48,15 +48,12 @@ export class ClassApp extends Component {
             <ClassScoreBoard
               score={this.state.score}
               wrongGuesses={this.state.wrongGuesses}
-              answersLeft={this.state.answersLeft}
+              answersLeft={answersLeft}
             />
             <ClassGameBoard
               updateScore={this.updateScore}
               updateWrongGuesses={this.updateWrongGuesses}
-              score={this.state.score}
-              wrongGuesses={this.state.wrongGuesses}
-              updateAnswersLeft={this.updateAnswersLeft}
-              answersLeft={this.state.answersLeft}
+              nextFishToName={initialFishes[guesses]}
             />
           </>
         )}

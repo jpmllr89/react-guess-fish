@@ -12,7 +12,7 @@ export function FunctionalGameBoard({
     setInput(e.target.value);
   }
 
-  function handleSubmit(e, fishes) {
+  function handleSubmit(e) {
     e.preventDefault();
     determineScore(input);
     setInput("");

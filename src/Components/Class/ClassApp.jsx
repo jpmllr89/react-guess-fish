@@ -24,12 +24,6 @@ export class ClassApp extends Component {
     }));
   };
 
-  updateAnswersLeft = () => {
-    this.setState((prevState) => ({
-      answersLeft: prevState.answersLeft.slice(1),
-    }));
-  };
-
   render() {
     const { score, wrongGuesses } = this.state;
     const guesses = score + wrongGuesses;

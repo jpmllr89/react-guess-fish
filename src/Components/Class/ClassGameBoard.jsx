@@ -11,38 +11,39 @@ export class ClassGameBoard extends Component {
     };
   }
 
-  updateInput = (input) => {
-    this.setState({ input: input });
-  };
-
+  // Called when the input changes in the box
   handleTextInput = (e) => {
     this.setState({ inputValue: e.target.value });
-    this.updateInput(e.target.value);
-    // console.log(this.state.nextFishToName.name);
+    this.setState({ input: e.target.value });
   };
 
+  // Call when the form is submitted to add the score
   determineScore = () => {
-    const { updateScore, nextFishToName, wrongGuesses, score } = this.props;
+    const {
+      updateScore,
+      nextFishToName,
+      updateWrongGuesses,
+      wrongGuesses,
+      score,
+    } = this.props;
     const { input } = this.state;
 
     if (input === nextFishToName.name) {
       updateScore(score + 1);
     } else {
-      this.props.updateWrongGuesses(wrongGuesses + 1);
+      updateWrongGuesses(wrongGuesses + 1);
     }
-
-    // updateAnswersLeft();
   };
 
+  // Below function will be called when the form is submitted
   handleSubmit = (e) => {
     e.preventDefault();
-    this.determineScore();
     this.setState({ inputValue: "" });
+    this.determineScore();
   };
 
   render() {
     const { nextFishToName } = this.props;
-    console.log(nextFishToName);
     return (
       <div id="game-board">
         <div id="fish-container">

@@ -3,17 +3,18 @@ import "./styles/score-board.css";
 
 export class ClassScoreBoard extends Component {
   render() {
+    const { answersLeft, wrongGuesses, score } = this.props;
     return (
       <div id="score-board">
-        <div>Incorrect 🔻: {this.props.wrongGuesses}</div>
+        <div>Incorrect 🔻: {wrongGuesses}</div>
         <div id="choices-left">
-          {this.props.answersLeft.map((answer) => (
+          {answersLeft.map((answer) => (
             <div key={answer} className="choice">
               {answer}
             </div>
           ))}
         </div>
-        <div>Correct ✅: {this.props.score}</div>
+        <div>Correct ✅: {score}</div>
       </div>
     );
   }
